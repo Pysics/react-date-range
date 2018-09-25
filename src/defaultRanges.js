@@ -10,20 +10,24 @@ import {
   isSameDay,
   differenceInCalendarDays,
 } from 'date-fns';
+import { zhCN } from 'date-fns/esm/locale';
+const dateOptions = { locale: zhCN };
+
+// const startOfWeek = startOfWeek(new Date(), dateOptions);
 
 const defineds = {
-  startOfWeek: startOfWeek(new Date()),
-  endOfWeek: endOfWeek(new Date()),
-  startOfLastWeek: startOfWeek(addDays(new Date(), -7)),
-  endOfLastWeek: endOfWeek(addDays(new Date(), -7)),
-  startOfToday: startOfDay(new Date()),
-  endOfToday: endOfDay(new Date()),
-  startOfYesterday: startOfDay(addDays(new Date(), -1)),
-  endOfYesterday: endOfDay(addDays(new Date(), -1)),
-  startOfMonth: startOfMonth(new Date()),
-  endOfMonth: endOfMonth(new Date()),
-  startOfLastMonth: startOfMonth(addMonths(new Date(), -1)),
-  endOfLastMonth: endOfMonth(addMonths(new Date(), -1)),
+  startOfWeek: startOfWeek(new Date(), dateOptions),
+  endOfWeek: endOfWeek(new Date(), dateOptions),
+  startOfLastWeek: startOfWeek(addDays(new Date(), -7), dateOptions),
+  endOfLastWeek: endOfWeek(addDays(new Date(), -7), dateOptions),
+  startOfToday: startOfDay(new Date(), dateOptions),
+  endOfToday: endOfDay(new Date(), dateOptions),
+  startOfYesterday: startOfDay(addDays(new Date(), -1), dateOptions),
+  endOfYesterday: endOfDay(addDays(new Date(), -1), dateOptions),
+  startOfMonth: startOfMonth(new Date(), dateOptions),
+  endOfMonth: endOfMonth(new Date(), dateOptions),
+  startOfLastMonth: startOfMonth(addMonths(new Date(), -1), dateOptions),
+  endOfLastMonth: endOfMonth(addMonths(new Date(), -1), dateOptions),
 };
 
 const staticRangeHandler = {
@@ -43,14 +47,14 @@ export function createStaticRanges(ranges) {
 
 export const defaultStaticRanges = createStaticRanges([
   {
-    label: 'Today',
+    label: '今天',
     range: () => ({
       startDate: defineds.startOfToday,
       endDate: defineds.endOfToday,
     }),
   },
   {
-    label: 'Yesterday',
+    label: '昨天',
     range: () => ({
       startDate: defineds.startOfYesterday,
       endDate: defineds.endOfYesterday,
@@ -58,28 +62,28 @@ export const defaultStaticRanges = createStaticRanges([
   },
 
   {
-    label: 'This Week',
+    label: '本周',
     range: () => ({
       startDate: defineds.startOfWeek,
       endDate: defineds.endOfWeek,
     }),
   },
   {
-    label: 'Last Week',
+    label: '上周',
     range: () => ({
       startDate: defineds.startOfLastWeek,
       endDate: defineds.endOfLastWeek,
     }),
   },
   {
-    label: 'This Month',
+    label: '本月',
     range: () => ({
       startDate: defineds.startOfMonth,
       endDate: defineds.endOfMonth,
     }),
   },
   {
-    label: 'Last Month',
+    label: '上月',
     range: () => ({
       startDate: defineds.startOfLastMonth,
       endDate: defineds.endOfLastMonth,
@@ -89,7 +93,7 @@ export const defaultStaticRanges = createStaticRanges([
 
 export const defaultInputRanges = [
   {
-    label: 'days up to today',
+    label: '天前',
     range(value) {
       return {
         startDate: addDays(defineds.startOfToday, (Math.max(Number(value), 1) - 1) * -1),
@@ -103,7 +107,7 @@ export const defaultInputRanges = [
     },
   },
   {
-    label: 'days starting today',
+    label: '天后',
     range(value) {
       const today = new Date();
       return {
