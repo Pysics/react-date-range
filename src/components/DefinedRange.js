@@ -31,7 +31,7 @@ class DefinedRanges extends Component {
     return { selectedRange, focusedRangeIndex };
   }
   render() {
-    const { onPreviewChange, ranges, rangeColors, className } = this.props;
+    const { onPreviewChange, ranges, rangeColors, className, disabled } = this.props;
     return (
       <div className={cx(styles.definedRangesWrapper, className)}>
         {this.props.headerContent}
@@ -41,6 +41,7 @@ class DefinedRanges extends Component {
             return (
               <button
                 type="button"
+                disabled={disabled}
                 className={cx(styles.staticRange, {
                   [styles.staticRangeSelected]: Boolean(selectedRange),
                 })}
@@ -69,6 +70,7 @@ class DefinedRanges extends Component {
           {this.props.inputRanges.map((rangeOption, i) => (
             <div className={styles.inputRange} key={i}>
               <input
+                disabled={disabled}
                 className={styles.inputRangeInput}
                 onFocus={() => this.setState({ focusedInput: i, rangeOffset: 0 })}
                 onBlur={() => this.setState({ rangeOffset: 0 })}
@@ -96,6 +98,7 @@ class DefinedRanges extends Component {
 }
 
 DefinedRanges.propTypes = {
+  disabled: PropTypes.bool,
   inputRanges: PropTypes.array,
   staticRanges: PropTypes.array,
   ranges: PropTypes.arrayOf(rangeShape),

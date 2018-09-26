@@ -85,7 +85,8 @@ var DefinedRanges = function (_Component) {
           onPreviewChange = _props2.onPreviewChange,
           ranges = _props2.ranges,
           rangeColors = _props2.rangeColors,
-          className = _props2.className;
+          className = _props2.className,
+          disabled = _props2.disabled;
 
       return _react2.default.createElement(
         'div',
@@ -103,6 +104,7 @@ var DefinedRanges = function (_Component) {
               'button',
               {
                 type: 'button',
+                disabled: disabled,
                 className: (0, _classnames2.default)(_styles2.default.staticRange, _defineProperty({}, _styles2.default.staticRangeSelected, Boolean(selectedRange))),
                 style: {
                   color: selectedRange ? selectedRange.color || rangeColors[focusedRangeIndex] : null
@@ -136,6 +138,7 @@ var DefinedRanges = function (_Component) {
               'div',
               { className: _styles2.default.inputRange, key: i },
               _react2.default.createElement('input', {
+                disabled: disabled,
                 className: _styles2.default.inputRangeInput,
                 onFocus: function onFocus() {
                   return _this2.setState({ focusedInput: i, rangeOffset: 0 });
@@ -169,6 +172,7 @@ var DefinedRanges = function (_Component) {
 }(_react.Component);
 
 DefinedRanges.propTypes = {
+  disabled: _propTypes2.default.bool,
   inputRanges: _propTypes2.default.array,
   staticRanges: _propTypes2.default.array,
   ranges: _propTypes2.default.arrayOf(_DayCell.rangeShape),

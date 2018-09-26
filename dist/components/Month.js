@@ -113,7 +113,8 @@ var Month = function (_PureComponent) {
           focusedRange = _props.focusedRange,
           drag = _props.drag,
           styles = _props.styles,
-          disabledDates = _props.disabledDates;
+          disabledDates = _props.disabledDates,
+          disabled = _props.disabled;
 
       var minDate = this.props.minDate && (0, _startOfDay2.default)(this.props.minDate);
       var maxDate = this.props.maxDate && (0, _endOfDay2.default)(this.props.maxDate);
@@ -163,7 +164,7 @@ var Month = function (_PureComponent) {
               isStartOfMonth: isStartOfMonth,
               isEndOfMonth: isEndOfMonth,
               key: index,
-              disabled: isOutsideMinMax || isDisabledSpecifically,
+              disabled: disabled || isOutsideMinMax || isDisabledSpecifically,
               isPassive: !(0, _isWithinInterval2.default)(day, {
                 start: monthDisplay.startDateOfMonth,
                 end: monthDisplay.endDateOfMonth
@@ -192,6 +193,7 @@ Month.propTypes = {
   month: _propTypes2.default.object,
   drag: _propTypes2.default.object,
   dateOptions: _propTypes2.default.object,
+  disabled: _propTypes2.default.bool,
   disabledDates: _propTypes2.default.array,
   preview: _propTypes2.default.shape({
     startDate: _propTypes2.default.object,
